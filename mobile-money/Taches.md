@@ -6,6 +6,8 @@ Binôme : **3877** et **4179**
 
 ---
 
+Faire avant tout : "composer install" dans terminal 
+
 ## Livraison v1
 
 ### Étudiant 3877 — Côté opérateur (back-office) + base de données
