@@ -34,7 +34,7 @@ class AuthController extends BaseController
 
         $prefixeModel = new PrefixeModel();
 
-        if (! $prefixeModel->estPrefixeValide($telephone)) {
+        if (! $prefixeModel->estPrefixeInterneValide($telephone)) {
             return redirect()->back()->with('error', 'Ce numéro n\'appartient pas à un préfixe valable chez cet opérateur.');
         }
 
