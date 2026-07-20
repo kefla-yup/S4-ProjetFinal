@@ -53,12 +53,12 @@
                         <th>Montant min</th>
                         <th>Montant max</th>
                         <th>Frais</th>
-                        <th colspan="2" class="text-end">Actions</th>
+                        <th class="text-end">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($t['baremes'])): ?>
-                        <tr><td colspan="5" class="text-center text-muted py-3"><i class="fas fa-inbox me-2"></i>Aucune tranche configurée.</td></tr>
+                        <tr><td colspan="4" class="text-center text-muted py-3"><i class="fas fa-inbox me-2"></i>Aucune tranche configurée.</td></tr>
                     <?php endif; ?>
                     <?php foreach ($t['baremes'] as $b): ?>
                         <tr>
@@ -66,10 +66,12 @@
                             <td><?= formater_ariary($b['montant_max']) ?></td>
                             <td><?= formater_ariary($b['frais']) ?></td>
                             <td class="text-end">
-                                <a href="<?= site_url('operateur/operations/bareme/edit/' . $b['id']) ?>" class="btn btn-sm btn-outline-primary">
-                                    <i class="fas fa-edit me-1"></i>Modifier
+                                <a href="<?= site_url('operateur/operations/bareme/edit/' . $b['id']) ?>"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-trash-alt me-1"></i>Modifier
                                 </a>
                             </td>
+
                             <td class="text-end">
                                 <a href="<?= site_url('operateur/operations/bareme/delete/' . $b['id']) ?>"
                                    class="btn btn-sm btn-outline-danger"

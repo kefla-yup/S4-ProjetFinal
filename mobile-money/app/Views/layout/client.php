@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title><?= esc($titre ?? 'Mobile Money - Espace Client') ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<?= base_url('bootstrap/css/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="<?= base_url('bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
+        <link rel="stylesheet" href="<?= base_url('assets/css/all.min.css') ?>">
+
     <style>
         /* ---------- Reset & Base ---------- */
         body {
@@ -32,7 +33,7 @@
             color: #60a5fa;
             margin-right: 10px;
         }
-        .navbar-modern .nav-link, .navbar-modern .btn-outline-light {
+        .navbar-modern .btn-outline-light {
             font-weight: 500;
             border-radius: 40px;
             padding: 6px 18px;
@@ -127,6 +128,13 @@
             transform: translateY(-2px);
         }
 
+        .btn-primary-modern {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            border: none;
+            color: #fff;
+        }
+        .btn-primary-modern:hover { color: #fff; background: #1d4ed8; }
+
         /* ---------- Tableaux ---------- */
         .table-modern {
             font-size: 0.95rem;
@@ -203,6 +211,6 @@
     <?= $this->renderSection('content') ?>
 </div>
 
-<script src="<?= base_url("bootstrap/js/bootstrap.bundle.min.js") ?>"></script>
+<script src="<?= base_url('bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 </body>
 </html>

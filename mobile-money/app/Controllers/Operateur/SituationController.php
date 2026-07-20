@@ -18,7 +18,9 @@ class SituationController extends BaseController
     }
 
     /**
-     * Situation des gains via les différents frais (retrait et transfert).
+     * Situation des gains via les différents frais, en séparant
+     * les opérations internes (nos clients) des transferts vers
+     * les autres opérateurs.
      */
     public function gains()
     {
@@ -27,9 +29,14 @@ class SituationController extends BaseController
         }
 
         $transactionModel = new TransactionModel();
+        $detail            = $transactionModel->gainsDetail();
+
+        $interne = array_values(array_filter($detail, static fn ($g) => $g['destination_type'] === 'interne'));
+        $externe = array_values(array_filter($detail, static fn ($g) => $g['destination_type'] === 'externe'));
 
         return view('operateur/situation_gains', [
-            'gains' => $transactionModel->totalFraisParType(),
+            'gainsInterne' => $interne,
+            'gainsExterne' => $externe,
         ]);
     }
 
@@ -46,6 +53,22 @@ class SituationController extends BaseController
 
         return view('operateur/situation_clients', [
             'clients' => $clientModel->db->table('v_situation_clients')->orderBy('telephone', 'ASC')->get()->getResultArray(),
+        ]);
+    }
+
+    /**
+     * Situation des montants à envoyer (à régler) à chaque autre opérateur.
+     */
+    public function montantsAEnvoyer()
+    {
+        if ($redirect = $this->requireAuth()) {
+            return $redirect;
+        }
+
+        $transactionModel = new TransactionModel();
+
+        return view('operateur/situation_montants', [
+            'montants' => $transactionModel->montantsAEnvoyer(),
         ]);
     }
 }

@@ -21,6 +21,9 @@
             <a href="<?= site_url('client/transfert') ?>" class="btn btn-info-modern btn-modern">
                 <i class="fas fa-exchange-alt"></i> Faire un transfert
             </a>
+            <a href="<?= site_url('client/transfert-multiple') ?>" class="btn btn-outline-modern btn-modern">
+                <i class="fas fa-share-alt"></i> Envoi multiple
+            </a>
             <a href="<?= site_url('client/historique') ?>" class="btn btn-outline-modern btn-modern">
                 <i class="fas fa-history"></i> Voir tout l'historique
             </a>
@@ -56,7 +59,7 @@
                                     <?= $t['destinataire_telephone'] ? ' <i class="fas fa-arrow-right mx-1"></i> ' . esc($t['destinataire_telephone']) : '' ?>
                                 </td>
                                 <td><?= formater_ariary($t['montant']) ?></td>
-                                <td><?= formater_ariary($t['frais']) ?></td>
+                                <td><?= formater_ariary($t['frais'] + ($t['commission_externe'] ?? 0)) ?></td>
                                 <td><?= formater_ariary($t['solde_apres']) ?></td>
                             </tr>
                         <?php endforeach; ?>

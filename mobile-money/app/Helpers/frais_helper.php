@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\BaremeModel;
+use App\Models\ParametreModel;
 
 if (! function_exists('calculer_frais')) {
     /**
@@ -19,6 +20,20 @@ if (! function_exists('calculer_frais')) {
             ->first();
 
         return $bareme ? (float) $bareme['frais'] : 0.0;
+    }
+}
+
+if (! function_exists('calculer_commission_externe')) {
+    /**
+     * Calcule la commission additionnelle (%) appliquée sur un transfert
+     * vers un numéro d'un autre opérateur, en plus du barème de frais normal.
+     */
+    function calculer_commission_externe(float $montant): float
+    {
+        $parametreModel = new ParametreModel();
+        $pourcentage    = $parametreModel->commissionExternePourcentage();
+
+        return round($montant * $pourcentage / 100, 2);
     }
 }
 

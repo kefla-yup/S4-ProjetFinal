@@ -25,12 +25,23 @@
                     <tr><td colspan="6" class="text-center text-muted py-4"><i class="fas fa-inbox me-2"></i>Aucune opération pour le moment.</td></tr>
                 <?php endif; ?>
                 <?php foreach ($transactions as $t): ?>
+                    <?php $fraisTotal = $t['frais'] + ($t['commission_externe'] ?? 0); ?>
                     <tr>
                         <td><?= esc($t['date_creation']) ?></td>
-                        <td><?= esc($t['type_libelle']) ?></td>
+                        <td>
+                            <?= esc($t['type_libelle']) ?>
+                            <?php if (! empty($t['destination_type'])): ?>
+                                <?= $t['destination_type'] === 'externe' ? '<span class="badge bg-secondary badge-modern"><i class="fas fa-globe me-1"></i>autre opérateur</span>' : '' ?>
+                            <?php endif; ?>
+                        </td>
                         <td><?= $t['destinataire_telephone'] ? '<i class="fas fa-arrow-right me-1"></i>Vers ' . esc($t['destinataire_telephone']) : '-' ?></td>
                         <td><?= formater_ariary($t['montant']) ?></td>
-                        <td><?= formater_ariary($t['frais']) ?></td>
+                        <td>
+                            <?= formater_ariary($fraisTotal) ?>
+                            <?php if (! empty($t['frais_retrait_inclus'])): ?>
+                                <br><span class="text-muted small"><i class="fas fa-plus-circle me-1"></i>+ <?= formater_ariary($t['frais_retrait_inclus']) ?> (frais de retrait inclus)</span>
+                            <?php endif; ?>
+                        </td>
                         <td><?= formater_ariary($t['solde_apres']) ?></td>
                     </tr>
                 <?php endforeach; ?>

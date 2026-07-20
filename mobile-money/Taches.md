@@ -6,8 +6,6 @@ Binôme : **3877** et **4179**
 
 ---
 
-Faire avant tout : "composer install" dans terminal 
-
 ## Livraison v1
 
 ### Étudiant 3877 — Côté opérateur (back-office) + base de données
@@ -52,5 +50,40 @@ Faire avant tout : "composer install" dans terminal
 | `app/Views/client/transfert.php` | Vue du formulaire de transfert | OK |
 | `app/Views/client/historique.php` | Vue de l'historique complet des opérations du client | OK |
 | `composer.json` / `.env` | Configuration du projet (dépendances, base SQLite) | OK |
+
+---
+
+## Livraison v2
+
+### Étudiant 3877 — Côté opérateur : préfixes externes, commission, situations détaillées
+
+| Fichier / Classe | Description | Statut |
+|---|---|---|
+| `base.sql` | Ajout de la colonne `type` (interne/externe) et `operateur_nom` sur `prefixes` ; table `parametres` (commission externe) ; colonnes `commission_externe`, `frais_retrait_inclus`, `destination_type`, `destinataire_telephone`, `lot_id` sur `transactions` ; vues `v_gains_detail` et `v_montants_a_envoyer` | OK |
+| `app/Models/PrefixeModel.php` | Ajout de `estPrefixeInterneValide()`, `typeDestination()`, `operateurExterne()`, `trouverPrefixe()` pour distinguer préfixes internes / autres opérateurs | OK |
+| `app/Models/ParametreModel.php` | Nouveau modèle clé/valeur pour la configuration de la commission externe (%) | OK |
+| `app/Models/TransactionModel.php` | Ajout de `gainsDetail()` (gains séparés interne/externe) et `montantsAEnvoyer()` | OK |
+| `app/Controllers/Operateur/PrefixeController.php` | Ajout / suppression des préfixes avec distinction interne / externe (avec nom de l'opérateur concurrent) | OK |
+| `app/Controllers/Operateur/ParametreController.php` | Nouveau contrôleur : configuration du % de commission sur les transferts vers les autres opérateurs | OK |
+| `app/Controllers/Operateur/SituationController.php` | Page "Situation gain" séparée opérateur / autres opérateurs ; nouvelle page "Situation des montants à envoyer à chaque opérateur" | OK |
+| `app/Views/operateur/prefixes.php` | Vue mise à jour : formulaire avec choix interne/externe + nom opérateur, deux tableaux séparés | OK |
+| `app/Views/operateur/parametres.php` | Nouvelle vue : configuration de la commission externe | OK |
+| `app/Views/operateur/situation_gains.php` | Vue mise à jour : deux tableaux (notre opérateur / autres opérateurs) + total général | OK |
+| `app/Views/operateur/situation_montants.php` | Nouvelle vue : montants à envoyer par opérateur externe | OK |
+| `app/Views/layout/operateur.php` | Ajout des liens de menu "Paramètres" et "Montants à envoyer" | OK |
+| `app/Views/operateur/dashboard.php` | Ajout des raccourcis vers les nouvelles pages | OK |
+| `app/Config/Routes.php` | Ajout des routes `operateur/parametres`, `operateur/situation/montants-a-envoyer` | OK |
+
+### Étudiant 4179 — Côté client : frais de retrait inclus, envoi multiple
+
+| Fichier / Classe | Description | Statut |
+|---|---|---|
+| `app/Controllers/Client/AuthController.php` | Connexion limitée aux préfixes internes uniquement (`estPrefixeInterneValide`) | OK |
+| `app/Controllers/Client/DashboardController.php` | Refonte du transfert : détection interne/externe, calcul de la commission externe, option "inclure frais de retrait lors de l'envoi" (`executerTransfert()` factorisé), nouvel envoi multiple (`transfertMultipleForm()` / `transfertMultiple()`) avec répartition équitable du montant entre plusieurs numéros | OK |
+| `app/Helpers/frais_helper.php` | Ajout de `calculer_commission_externe()` | OK |
+| `app/Views/client/transfert.php` | Ajout de la case à cocher "Inclure les frais de retrait du destinataire" | OK |
+| `app/Views/client/transfert_multiple.php` | Nouvelle vue : envoi vers plusieurs numéros avec montant total réparti automatiquement | OK |
+| `app/Views/client/dashboard.php` | Ajout du bouton "Envoi multiple" et prise en compte de la commission dans l'affichage des frais | OK |
+| `app/Views/client/historique.php` | Affichage du badge "autre opérateur" et du détail des frais de retrait inclus | OK |
 
 ---

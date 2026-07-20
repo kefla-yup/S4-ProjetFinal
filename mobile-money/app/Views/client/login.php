@@ -13,7 +13,7 @@
                     <label class="form-label fw-semibold"><i class="fas fa-phone me-1"></i>Numéro de téléphone</label>
                     <input type="text" name="telephone" class="form-control form-control-lg" placeholder="0331234567" required>
                 </div>
-                <button type="submit" class="btn btn-primary btn-modern w-100" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);border:none;">
+                <button type="submit" class="btn btn-primary-modern btn-modern w-100">
                     <i class="fas fa-sign-in-alt me-2"></i>Se connecter
                 </button>
             </form>

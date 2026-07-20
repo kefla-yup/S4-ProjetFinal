@@ -26,6 +26,9 @@ $routes->group('client', function ($routes) {
     $routes->get('transfert', 'Client\DashboardController::transfertForm');
     $routes->post('transfert', 'Client\DashboardController::transfert');
 
+    $routes->get('transfert-multiple', 'Client\DashboardController::transfertMultipleForm');
+    $routes->post('transfert-multiple', 'Client\DashboardController::transfertMultiple');
+
     $routes->get('historique', 'Client\DashboardController::historique');
 });
 
@@ -48,10 +51,15 @@ $routes->group('operateur', function ($routes) {
     $routes->get('operations', 'Operateur\OperationController::index');
     $routes->post('operations/bareme/add', 'Operateur\OperationController::addBareme');
     $routes->get('operations/bareme/delete/(:num)', 'Operateur\OperationController::deleteBareme/$1');
-    $routes->get("operations/bareme/edit/(:num)", "Operateur\OperationController::editbareme/$1" );
-    $routes->post("operations/bareme/modif/(:num)", "Operateur\OperationController::modifbareme/$1" );
+    $routes->get('operations/bareme/edit/(:num)', 'Operateur\OperationController::editBareme/$1');
+    $routes->post('operations/bareme/modif/(:num)', 'Operateur\OperationController::modifBareme/$1');
+
+    // Paramètres (commission externe)
+    $routes->get('parametres', 'Operateur\ParametreController::index');
+    $routes->post('parametres/update', 'Operateur\ParametreController::update');
 
     // Situations
     $routes->get('situation/gains', 'Operateur\SituationController::gains');
     $routes->get('situation/clients', 'Operateur\SituationController::clients');
+    $routes->get('situation/montants-a-envoyer', 'Operateur\SituationController::montantsAEnvoyer');
 });
