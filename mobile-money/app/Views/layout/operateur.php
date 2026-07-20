@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title><?= esc($titre ?? 'Mobile Money - Back-office Opérateur') ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('bootstrap/css/bootstrap.min.css') ?>">
+
 </head>
 <body class="bg-light">
 
@@ -39,6 +40,7 @@
     <?= $this->renderSection('content') ?>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?= base_url("bootstrap/js/bootstrap.bundle.min.js") ?>"></script>
+
 </body>
 </html>
