@@ -20,6 +20,9 @@
                     <button type="submit" class="btn btn-dark w-100">Se connecter</button>
                 </form>
                 <p class="text-muted small mt-3 mb-0">Compte par défaut : admin / admin123</p>
+                <p class="text-center mb-0">
+                    <a href="<?= site_url('client/login') ?>" class="small">Accès client (front-office)</a>
+                </p>
             </div>
         </div>
     </div>
