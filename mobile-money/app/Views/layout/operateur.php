@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title><?= esc($titre ?? 'Mobile Money - Back-office Opérateur') ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<?= base_url('bootstrap/css/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="<?= base_url('bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/css/all.min.css') ?>">
     <style>
         body {
             background: #f1f5f9;
@@ -123,6 +123,18 @@
             border-radius: 40px;
             font-weight: 500;
         }
+
+        .card-stats {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #fff;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.2);
+            transition: transform 0.25s;
+        }
+        .card-stats:hover { transform: scale(1.02); }
+        .card-stats h6 { opacity: 0.8; font-weight: 400; }
+        .card-stats h2 { font-weight: 700; }
     </style>
 </head>
 <body>
@@ -137,8 +149,10 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/prefixes') ?>"><i class="fas fa-tags"></i>Préfixes</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/operations') ?>"><i class="fas fa-list-ul"></i>Types & barèmes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/parametres') ?>"><i class="fas fa-sliders-h"></i>Paramètres</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/situation/gains') ?>"><i class="fas fa-chart-line"></i>Gains</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/situation/clients') ?>"><i class="fas fa-users"></i>Comptes clients</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/situation/montants-a-envoyer') ?>"><i class="fas fa-paper-plane"></i>Montants à envoyer</a></li>
                 </ul>
             </div>
             <div class="d-flex align-items-center">
@@ -170,6 +184,6 @@
     <?= $this->renderSection('content') ?>
 </div>
 
-<script src="<?= base_url("bootstrap/js/bootstrap.bundle.min.js") ?>"></script>
+<script src="<?= base_url('bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 </body>
 </html>

@@ -17,7 +17,8 @@ class PrefixeController extends BaseController
     }
 
     /**
-     * Liste et formulaire d'ajout des préfixes valables de l'opérateur.
+     * Liste et formulaire d'ajout des préfixes : les nôtres (interne)
+     * et ceux des autres opérateurs (externe).
      */
     public function index()
     {
@@ -28,7 +29,8 @@ class PrefixeController extends BaseController
         $prefixeModel = new PrefixeModel();
 
         return view('operateur/prefixes', [
-            'prefixes' => $prefixeModel->orderBy('prefixe', 'ASC')->findAll(),
+            'prefixesInternes' => $prefixeModel->where('type', 'interne')->orderBy('prefixe', 'ASC')->findAll(),
+            'prefixesExternes' => $prefixeModel->where('type', 'externe')->orderBy('prefixe', 'ASC')->findAll(),
         ]);
     }
 
@@ -38,10 +40,16 @@ class PrefixeController extends BaseController
             return $redirect;
         }
 
-        $prefixe = trim($this->request->getPost('prefixe'));
+        $prefixe      = trim($this->request->getPost('prefixe'));
+        $type         = $this->request->getPost('type') === 'externe' ? 'externe' : 'interne';
+        $operateurNom = trim($this->request->getPost('operateur_nom'));
 
         if (empty($prefixe)) {
             return redirect()->back()->with('error', 'Veuillez saisir un préfixe.');
+        }
+
+        if ($type === 'externe' && empty($operateurNom)) {
+            return redirect()->back()->with('error', 'Veuillez indiquer le nom de l\'opérateur pour un préfixe externe.');
         }
 
         $prefixeModel = new PrefixeModel();
@@ -50,7 +58,12 @@ class PrefixeController extends BaseController
             return redirect()->back()->with('error', 'Ce préfixe existe déjà.');
         }
 
-        $prefixeModel->insert(['prefixe' => $prefixe, 'actif' => 1]);
+        $prefixeModel->insert([
+            'prefixe'       => $prefixe,
+            'type'          => $type,
+            'operateur_nom' => $type === 'externe' ? $operateurNom : null,
+            'actif'         => 1,
+        ]);
 
         return redirect()->to('/operateur/prefixes')->with('success', 'Préfixe ajouté.');
     }
