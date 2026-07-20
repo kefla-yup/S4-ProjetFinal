@@ -1,10 +1,10 @@
 <?= $this->extend('layout/operateur') ?>
 <?= $this->section('content') ?>
 
-<h4 class="mb-4">Situation des gains (frais perçus)</h4>
+<h4 class="mb-4"><i class="fas fa-chart-line me-2"></i>Situation des gains (frais perçus)</h4>
 
-<div class="card shadow-sm">
-    <table class="table mb-0">
+<div class="card-glass">
+    <table class="table table-modern">
         <thead>
             <tr>
                 <th>Type d'opération</th>

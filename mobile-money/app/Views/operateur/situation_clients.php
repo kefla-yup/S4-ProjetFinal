@@ -1,10 +1,10 @@
 <?= $this->extend('layout/operateur') ?>
 <?= $this->section('content') ?>
 
-<h4 class="mb-4">Situation des comptes clients</h4>
+<h4 class="mb-4"><i class="fas fa-users me-2"></i>Situation des comptes clients</h4>
 
-<div class="card shadow-sm">
-    <table class="table table-striped mb-0">
+<div class="card-glass">
+    <table class="table table-modern">
         <thead>
             <tr>
                 <th>Téléphone</th>
@@ -15,7 +15,7 @@
         </thead>
         <tbody>
             <?php if (empty($clients)): ?>
-                <tr><td colspan="4" class="text-center text-muted py-3">Aucun client pour le moment.</td></tr>
+                <tr><td colspan="4" class="text-center text-muted py-4"><i class="fas fa-inbox me-2"></i>Aucun client pour le moment.</td></tr>
             <?php endif; ?>
             <?php foreach ($clients as $c): ?>
                 <tr>
