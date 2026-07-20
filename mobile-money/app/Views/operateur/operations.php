@@ -69,6 +69,9 @@
                                 <a href="<?= site_url('operateur/operations/bareme/delete/' . $b['id']) ?>"
                                    class="btn btn-sm btn-outline-danger"
                                    onclick="return confirm('Supprimer cette tranche ?');">Supprimer</a>
+                                   </td>
+                                   <td class="text-end">
+                                <a href="<?= site_url('operateur/operations/bareme/edit/' . $b['id']) ?>" class="btn btn-sm btn-outline-primary"> Modifier </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

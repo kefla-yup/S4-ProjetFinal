@@ -48,6 +48,8 @@ $routes->group('operateur', function ($routes) {
     $routes->get('operations', 'Operateur\OperationController::index');
     $routes->post('operations/bareme/add', 'Operateur\OperationController::addBareme');
     $routes->get('operations/bareme/delete/(:num)', 'Operateur\OperationController::deleteBareme/$1');
+    $routes->get("operations/bareme/edit/(:num)", "Operateur\OperationController::editbareme/$1" );
+    $routes->post("operations/bareme/modif/(:num)", "Operateur\OperationController::modifbareme/$1" );
 
     // Situations
     $routes->get('situation/gains', 'Operateur\SituationController::gains');
