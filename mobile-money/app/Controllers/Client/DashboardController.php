@@ -104,8 +104,9 @@ class DashboardController extends BaseController
         }
 
         $clientModel = new ClientModel();
+        $client["client"] = $clientModel->find($this->clientId);
 
-        return view('client/retrait', ['client' => $clientModel->find($this->clientId)]);
+        return view('client/retrait', $client);
     }
 
     public function retrait()
