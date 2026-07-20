@@ -2,25 +2,29 @@
 <?= $this->section('content') ?>
 
 <div class="row justify-content-center">
-    <div class="col-md-5">
-        <div class="card shadow-sm">
-            <div class="card-body p-4">
-                <h4 class="mb-3 text-center">Connexion Opérateur</h4>
+    <div class="col-md-6 col-lg-4">
+        <div class="card-glass p-4">
+            <h4 class="text-center mb-3"><i class="fas fa-user-shield me-2"></i>Connexion Opérateur</h4>
 
-                <form method="post" action="<?= site_url('operateur/login') ?>">
-                    <?= csrf_field() ?>
-                    <div class="mb-3">
-                        <label class="form-label">Identifiant</label>
-                        <input type="text" name="username" class="form-control" required autofocus>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Mot de passe</label>
-                        <input type="password" name="password" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-dark w-100">Se connecter</button>
-                </form>
-                <p class="text-muted small mt-3 mb-0">Compte par défaut : admin / admin123</p>
-            </div>
+            <form method="post" action="<?= site_url('operateur/login') ?>">
+                <?= csrf_field() ?>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold"><i class="fas fa-user me-1"></i>Identifiant</label>
+                    <input type="text" name="username" class="form-control form-control-lg" required autofocus>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label fw-semibold"><i class="fas fa-lock me-1"></i>Mot de passe</label>
+                    <input type="password" name="password" class="form-control form-control-lg" required>
+                </div>
+                <button type="submit" class="btn btn-dark-modern w-100">
+                    <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                </button>
+            </form>
+            <p class="text-muted small mt-3 mb-0"><i class="fas fa-info-circle me-1"></i>Compte par défaut : admin / admin123</p>
+            <p class="text-center mb-0">
+                    <a href="<?= site_url('client/login') ?>"  class="small text-muted">
+                    <i class="fas fa-user-shield me-1"></i>Accès client (front-office)</a>
+            </p>
         </div>
     </div>
 </div>
