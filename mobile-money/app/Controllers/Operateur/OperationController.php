@@ -72,4 +72,47 @@ class OperationController extends BaseController
 
         return redirect()->to('/operateur/operations')->with('success', 'Tranche de frais supprimée.');
     }
+
+     public function editbareme(int $id){
+
+        if ($redirect = $this->requireAuth()) {
+            return $redirect;
+        }
+        
+        $typeModel   = new TypeOperationModel();
+        $baremeModel = new BaremeModel();
+
+        $bareme = $baremeModel->find($id);
+
+        $types = $typeModel->findAll();
+
+        if (!$bareme) {
+            return redirect()->to('/operateur/operations')->with('error', 'Tranche de frais introuvable.');
+        }
+
+
+        return view('operateur/editbareme', [
+    'bareme' => $bareme,
+    'types'  => $types,
+]);
+
+    
+    
+     }
+
+     public function modifbareme(int $id){
+        $barememodel = new BaremeModel();
+        
+
+        $barememodel -> find($id);
+
+        $barememodel -> update($id, [
+            "type_operation_id" => $this->request->getPost('type_operation_id'),
+            "montant_min" => $this->request->getPost('montant_min'),
+            "montant_max" => $this->request->getPost('montant_max'),
+        ]);
+
+        return redirect()-> to("operateur/operations")->with("success", "Tranche modifiée avec succès")    ;
+
+     }
 }
