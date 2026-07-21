@@ -228,3 +228,7 @@ INSERT INTO baremes (type_operation_id, montant_min, montant_max, frais) VALUES
 -- les autres opérateurs, en plus du barème de frais normal.
 INSERT INTO parametres (cle, valeur) VALUES
 ('commission_externe_pourcentage', '2');
+
+
+INSERT INTO parametres (cle, valeur) VALUES
+('promotion_pourcentage', '2');

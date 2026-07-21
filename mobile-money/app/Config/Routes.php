@@ -58,6 +58,9 @@ $routes->group('operateur', function ($routes) {
     $routes->get('parametres', 'Operateur\ParametreController::index');
     $routes->post('parametres/update', 'Operateur\ParametreController::update');
 
+    $routes->get('promotion', 'Operateur\ParametreController::promotion');
+    $routes->post('promotion/update_promotion', 'Operateur\ParametreController::updatePromotion');
+
     // Situations
     $routes->get('situation/gains', 'Operateur\SituationController::gains');
     $routes->get('situation/clients', 'Operateur\SituationController::clients');

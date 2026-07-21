@@ -39,4 +39,9 @@ class ParametreModel extends Model
     {
         return (float) $this->getValeur('commission_externe_pourcentage', '0');
     }
+
+    public function promotionPourcentage(): float
+    {
+        return (float) $this->getValeur('promotion_pourcentage', '0');
+    }
 }

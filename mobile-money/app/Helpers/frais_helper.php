@@ -35,6 +35,18 @@ if (! function_exists('calculer_commission_externe')) {
 
         return round($montant * $pourcentage / 100, 2);
     }
+
+    
+}
+if (! function_exists('calculer_promotion')) {
+function calculer_promotion(float $montant): float
+    {
+        $parametreModel = new ParametreModel();
+        $pourcentage    = $parametreModel->promotionPourcentage();
+
+        return round($montant - $pourcentage / 100, 2);
+    }
+
 }
 
 if (! function_exists('formater_ariary')) {

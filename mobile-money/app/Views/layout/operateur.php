@@ -150,6 +150,7 @@
                     <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/prefixes') ?>"><i class="fas fa-tags"></i>Préfixes</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/operations') ?>"><i class="fas fa-list-ul"></i>Types & barèmes</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/parametres') ?>"><i class="fas fa-sliders-h"></i>Paramètres</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/promotion') ?>"><i class="fas fa-sliders-h"></i>Promotion</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/situation/gains') ?>"><i class="fas fa-chart-line"></i>Gains</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/situation/clients') ?>"><i class="fas fa-users"></i>Comptes clients</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= site_url('operateur/situation/montants-a-envoyer') ?>"><i class="fas fa-paper-plane"></i>Montants à envoyer</a></li>

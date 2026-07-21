@@ -50,4 +50,36 @@ class ParametreController extends BaseController
 
         return redirect()->to('/operateur/parametres')->with('success', 'Paramètre mis à jour.');
     }
+
+
+    public function promotion()
+    {
+        if ($redirect = $this->requireAuth()) {
+            return $redirect;
+        }
+
+        $parametreModel = new ParametreModel();
+
+        return view('operateur/promotion', [
+            'promotion' => $parametreModel->promotionPourcentage(),
+        ]);
+    }
+
+    public function updatePromotion()
+    {
+        if ($redirect = $this->requireAuth()) {
+            return $redirect;
+        }
+
+        $pourcentage = (float) $this->request->getPost('promotion_pourcentage');
+
+        if ($pourcentage < 0) {
+            return redirect()->back()->with('error', 'Le pourcentage doit être positif.');
+        }
+
+        $parametreModel = new ParametreModel();
+        $parametreModel->setValeur('promotion_pourcentage', (string) $pourcentage);
+
+        return redirect()->to('/operateur/parametres')->with('success', 'Paramètre mis à jour.');
+    }
 }
