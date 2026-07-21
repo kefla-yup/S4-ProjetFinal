@@ -298,13 +298,13 @@ class DashboardController extends BaseController
 
         $frais              = calculer_frais($typeTransfert['id'], $montant);
         $epargne  = $typeDestination === 'externe' ? epargnE($montant) : 0.0;
-        $commissions  = $typeDestination === 'externe' ? calculer_commission_externe($montant) : 0.0;
+        $commissionExterne  = $typeDestination === 'externe' ? calculer_commission_externe($montant) : 0.0;
 
         // Option "inclure frais de retrait" : l'expéditeur paie en plus le
         // frais que le destinataire aurait à payer pour retirer ce montant.
         $fraisRetraitInclus = $inclureFraisRetrait ? calculer_frais($typeRetrait['id'], $montant) : 0.0;
 
-        $totalDebite = $montant + $frais + $epargne + $fraisRetraitInclus+$commissions;
+        $totalDebite = $montant + $frais + $epargne + $fraisRetraitInclus+$commissionExterne;
 
         $expediteur = $clientModel->find($expediteurId);
 
