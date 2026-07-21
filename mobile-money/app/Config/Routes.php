@@ -30,6 +30,9 @@ $routes->group('client', function ($routes) {
     $routes->post('transfert-multiple', 'Client\DashboardController::transfertMultiple');
 
     $routes->get('historique', 'Client\DashboardController::historique');
+
+    $routes->get('epargne', 'Client\DashboardController::epargne');
+    $routes->post('epargne/updateEpargne', 'Client\DashboardController::updateEpargne');
 });
 
 // --------------------------------------------------------------
@@ -60,6 +63,9 @@ $routes->group('operateur', function ($routes) {
 
     $routes->get('promotion', 'Operateur\ParametreController::promotion');
     $routes->post('promotion/update_promotion', 'Operateur\ParametreController::updatePromotion');
+
+
+    
 
     // Situations
     $routes->get('situation/gains', 'Operateur\SituationController::gains');

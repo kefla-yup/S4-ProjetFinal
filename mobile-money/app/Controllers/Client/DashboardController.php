@@ -7,6 +7,8 @@ use App\Models\ClientModel;
 use App\Models\PrefixeModel;
 use App\Models\TransactionModel;
 use App\Models\TypeOperationModel;
+use App\Models\ParametreModel;
+
 
 class DashboardController extends BaseController
 {
@@ -295,13 +297,14 @@ class DashboardController extends BaseController
         $typeRetrait   = $typeModel->getByCode('retrait');
 
         $frais              = calculer_frais($typeTransfert['id'], $montant);
-        $commissionExterne  = $typeDestination === 'externe' ? calculer_commission_externe($montant) : 0.0;
+        $epargne  = $typeDestination === 'externe' ? epargnE($montant) : 0.0;
+        $commissions  = $typeDestination === 'externe' ? calculer_commission_externe($montant) : 0.0;
 
         // Option "inclure frais de retrait" : l'expéditeur paie en plus le
         // frais que le destinataire aurait à payer pour retirer ce montant.
         $fraisRetraitInclus = $inclureFraisRetrait ? calculer_frais($typeRetrait['id'], $montant) : 0.0;
 
-        $totalDebite = $montant + $frais + $commissionExterne + $fraisRetraitInclus;
+        $totalDebite = $montant + $frais + $epargne + $fraisRetraitInclus+$commissions;
 
         $expediteur = $clientModel->find($expediteurId);
 
@@ -331,7 +334,9 @@ class DashboardController extends BaseController
             'type_operation_id'      => $typeTransfert['id'],
             'montant'                => $montant,
             'frais'                  => $frais,
-            'commission_externe'     => $commissionExterne,
+            'epargne'     => $epargne,
+           'commission_externe' => $commissionExterne,
+
             'frais_retrait_inclus'   => $fraisRetraitInclus,
             'destination_type'       => $typeDestination,
             'destinataire_id'        => $destinataireId,
@@ -341,7 +346,7 @@ class DashboardController extends BaseController
         ]);
 
         return [
-            'frais_total'  => $frais + $commissionExterne,
+            'frais_total'  => $frais + $epargne+$commissionExterne,
             'total_debite' => $totalDebite,
         ];
     }
@@ -360,5 +365,37 @@ class DashboardController extends BaseController
         return view('client/historique', [
             'transactions' => $transactionModel->historiqueClient($this->clientId),
         ]);
+    }
+
+
+    public function epargne()
+    {
+        if ($redirect = $this->requireAuth()) {
+            return $redirect;
+        }
+
+        $parametreModel = new ParametreModel();
+
+        return view('client/epargne', [
+            'epargne' => $parametreModel->epargne(),
+        ]);
+    }
+
+    public function updateEpargne()
+    {
+        if ($redirect = $this->requireAuth()) {
+            return $redirect;
+        }
+
+        $pourcentage = (float) $this->request->getPost('epargne');
+
+        if ($pourcentage < 0) {
+            return redirect()->back()->with('error', 'Le pourcentage doit être positif.');
+        }
+
+        $parametreModel = new ParametreModel();
+        $parametreModel->setValeur('epargne', (string) $pourcentage);
+
+        return redirect()->to('/client/dashboard')->with('success', 'Paramètre mis à jour.');
     }
 }

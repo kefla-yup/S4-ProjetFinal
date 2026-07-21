@@ -232,3 +232,6 @@ INSERT INTO parametres (cle, valeur) VALUES
 
 INSERT INTO parametres (cle, valeur) VALUES
 ('promotion_pourcentage', '2');
+
+INSERT INTO parametres (cle, valeur) VALUES
+('epargne', '2');

@@ -27,6 +27,10 @@
             <a href="<?= site_url('client/historique') ?>" class="btn btn-outline-modern btn-modern">
                 <i class="fas fa-history"></i> Voir tout l'historique
             </a>
+
+            <a href="<?= site_url('client/epargne') ?>" class="btn btn-outline-modern btn-modern">
+                <i class="fas fa-history"></i> faire un epargne
+            </a>
         </div>
     </div>
 
@@ -44,6 +48,7 @@
                             <th>Type</th>
                             <th>Montant</th>
                             <th>Frais</th>
+                            <th>epargne</th>
                             <th>Solde après</th>
                         </tr>
                     </thead>
@@ -59,7 +64,8 @@
                                     <?= $t['destinataire_telephone'] ? ' <i class="fas fa-arrow-right mx-1"></i> ' . esc($t['destinataire_telephone']) : '' ?>
                                 </td>
                                 <td><?= formater_ariary($t['montant']) ?></td>
-                                <td><?= formater_ariary($t['frais'] + ($t['commission_externe'] ?? 0)) ?></td>
+                                <td><?= formater_ariary($t['frais'] + ($t['epargne'] ?? 0)) ?></td>
+                                <td><?= formater_ariary(($t['epargne'] ?? 0)) ?></td>
                                 <td><?= formater_ariary($t['solde_apres']) ?></td>
                             </tr>
                         <?php endforeach; ?>

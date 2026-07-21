@@ -48,6 +48,18 @@ function calculer_promotion(float $montant): float
     }
 
 }
+if (! function_exists('epargnE')) {
+function epargnE(float $montant): float
+    {
+        $parametreModel = new ParametreModel();
+        $pourcentage    = $parametreModel->epargne();
+
+        return round($montant * $pourcentage / 100, 2);
+    }
+
+}
+
+
 
 if (! function_exists('formater_ariary')) {
     /**
@@ -57,4 +69,6 @@ if (! function_exists('formater_ariary')) {
     {
         return number_format($montant, 0, ',', ' ') . ' Ar';
     }
+
+
 }

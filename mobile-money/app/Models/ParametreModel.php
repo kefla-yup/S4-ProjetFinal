@@ -44,4 +44,9 @@ class ParametreModel extends Model
     {
         return (float) $this->getValeur('promotion_pourcentage', '0');
     }
+
+ public function epargne(): float
+    {
+        return (float) $this->getValeur('epargne', '0');
+    }
 }

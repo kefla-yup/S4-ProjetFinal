@@ -82,4 +82,6 @@ class ParametreController extends BaseController
 
         return redirect()->to('/operateur/parametres')->with('success', 'Paramètre mis à jour.');
     }
+
+    
 }
